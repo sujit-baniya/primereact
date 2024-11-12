@@ -16,7 +16,8 @@ export const Dropdown = React.memo(
     React.forwardRef((inProps, ref) => {
         const mergeProps = useMergeProps();
         const context = React.useContext(PrimeReactContext);
-        const props = DropdownBase.getProps(inProps, context);
+        const elProps = DropdownBase.getProps(inProps, context);
+        const {useOptionAsValue, ...props} = elProps
         const [filterState, setFilterState] = React.useState('');
         const [focusedState, setFocusedState] = React.useState(false);
         const [focusedOptionIndex, setFocusedOptionIndex] = React.useState(-1);
@@ -831,7 +832,7 @@ export const Dropdown = React.memo(
         };
 
         const getOptionValue = (option) => {
-            if (props.useOptionAsValue) {
+            if (useOptionAsValue) {
                 return option;
             }
 
